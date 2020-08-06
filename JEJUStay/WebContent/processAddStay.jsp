@@ -11,7 +11,10 @@
 	String stay_fileName= "";
 	String stay_fileRoom= "";
 	String stay_fileInfo= "";
-	String realFolder = "C:\\upload"; 	//웹 애플리케이션 상의 절대 경로
+	String original_stay_fileName= "";
+	String original_stay_fileRoom= "";
+	String original_stay_fileInfo= "";
+	String realFolder = request.getSession().getServletContext().getRealPath("/media");
 	int maxSize = 5 * 1024 * 1024;		//최대 업로드될 파일의 크기 5MB
 	String encType = "utf-8";			//인코딩 유형
 	
@@ -42,17 +45,21 @@
 		max = Integer.valueOf(stay_max);
 	}
 	
-	Enumeration files1= multi.getFileNames();
-	Enumeration files2 = multi.getFileNames();
-	Enumeration files3 = multi.getFileNames();
+	//업로드한 파일들을 Enumeration 타입으로 변환 / 데이터를 뽑아올 때 유용한 인터페이스 (java.util 패키지에 정의)
+	Enumeration files= multi.getFileNames();
 	
-	String fname = (String) files1.nextElement();
-	String fRoom = (String) files2.nextElement();
-	String fInfo = (String) files3.nextElement();
+	String fname = (String) files.nextElement();
+	stay_fileName = multi.getFilesystemName(fname);
+	original_stay_fileName = multi.getOriginalFileName(fname);
 	
-	String fileName = multi.getFilesystemName(fname);
-	String fileRoom = multi.getFilesystemName(fRoom);
-	String fileInfo = multi.getFilesystemName(fInfo);
+	
+	String fRoom = (String) files.nextElement();
+	stay_fileRoom = multi.getFilesystemName(fRoom);
+	original_stay_fileRoom = multi.getOriginalFileName(fRoom);
+	
+	String fInfo = (String) files.nextElement();
+	stay_fileInfo = multi.getFilesystemName(fInfo);
+	original_stay_fileInfo = multi.getOriginalFileName(fInfo);
 
 	PreparedStatement pstmt = null;
 	
@@ -66,14 +73,14 @@
 	pstmt.setString(6, stay_roomType);
 	pstmt.setInt(7, price);
 	pstmt.setInt(8, max);
-	pstmt.setString(9, fileName);
-	pstmt.setString(10, fileRoom);
-	pstmt.setString(11, fileInfo);
+	pstmt.setString(9, stay_fileName);
+	pstmt.setString(10, stay_fileRoom);
+	pstmt.setString(11, stay_fileInfo);
 	
 	pstmt.executeUpdate();
 	
 	if(pstmt != null) pstmt.close();
 	if(conn != null) conn.close();
 
-	response.sendRedirect("menuRoom.jsp");
+	response.sendRedirect("http://localhost:9090/JEJUStay/editStay.jsp?edit=update");
 %>

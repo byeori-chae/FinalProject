@@ -14,14 +14,18 @@
 		
 		ConsultDAO dao = new ConsultDAO();
 		ConsultDTO dto = new ConsultDTO();
-			
+		
+		ReserveDAO reservedao = new ReserveDAO();
+		ReserveDTO reservedto = new ReserveDTO();
+		
 		dto.setCstNo(Integer.parseInt(request.getParameter("cst_no")));
-
-		dao.delete(dto);
+		
+		int result = dao.delete(dto);
 			
 	%>
 	<%
-			
+	
+		response.sendRedirect("http://localhost:9090/JEJUStay/admin.jsp");
 		
 	%>
 	

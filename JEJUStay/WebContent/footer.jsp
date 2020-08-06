@@ -1,3 +1,3 @@
 <footer class = "container">
-	<p>&copy; 2020, JEJU's BAM Co., Ltd</p>
+	<p>&copy; JEJU's BAM</p>
 </footer>

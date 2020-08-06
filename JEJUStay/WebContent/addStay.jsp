@@ -17,7 +17,7 @@
 }
 </style>
 <script type="text/javascript" src="./resources/js/validation.js"></script>
-<title>상품 등록</title>
+<title>상품등록 | Admin</title>
 </head>
 <body>
 	<jsp:include page="menu_admin.jsp" />
@@ -41,8 +41,8 @@
 				<label class="col-sm-2">숙소 타입</label>
 				<div class="col-sm-5">
 					<input type="radio" name="stay_type" value="호텔"> 호텔&nbsp;&nbsp;
-					<input type="radio" name="stay_type" value="리조트"> 리조트&nbsp;&nbsp;
 					<input type="radio" name="stay_type" value="펜션"> 펜션&nbsp;&nbsp;
+					<input type="radio" name="stay_type" value="리조트"> 리조트&nbsp;&nbsp;
 					<input type="radio" name="stay_type" value="카라반"> 카라반
 				</div>
 			</div>
@@ -82,26 +82,26 @@
 			<div class="form-group row">
 				<label class="col-sm-2">최대 숙박 인원</label>
 				<div class="col-sm-1">
-					<input type="text" size=2 id="stay_max" name="stay_max"
+					<input type="text" size=2 id="stay_max"  id="stay_max" name="stay_max"
 						class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">숙소 사진</label>
 				<div class="col-sm-3">
-					<input type="file" name="stay_fileName" class="form-control">
+					<input type="file" id="stay_fileName" name="stay_fileName" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">객실 사진</label>
 				<div class="col-sm-3">
-					<input type="file" name="stay_fileRoom" class="form-control">
+					<input type="file" id="stay_fileRoom" name="stay_fileRoom" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">숙소 정보 사진</label>
 				<div class="col-sm-3">
-					<input type="file" name="stay_fileInfo" class="form-control">
+					<input type="file" id="stay_fileInfo" name="stay_fileInfo" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">

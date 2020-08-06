@@ -9,7 +9,7 @@
 	<div class="container" align="center">
 		<div class="col-md-4 col-md-offset-4">
 		<br><br><br><br>
-			<h4 class="form-signin-heading" align="center">회원/관리자 로그인</h4>
+			<h3 class="form-signin-heading" align="center">회원 로그인</h3>
 			<br>
 			<%
 				String error = request.getParameter("error");
@@ -19,20 +19,20 @@
 					out.println("</div>");
 				}
 			%>
-			<form class="form-signin" action="j_security_check" method="post">
+			<form class="form-signin" action="http://localhost:9090/JEJUStay/member/processLoginMember.jsp" method="post">
 				<div class="form-group">
 					<label for="inputUserName" class="sr-only">ID</label>
-					<input type="text" class="form-control" placeholder="ID" name='j_username' required autofocus>
+					<input type="text" class="form-control" placeholder="ID" name='id' required autofocus>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword" class="sr-only"> 비밀번호 :</label> 
-					<input	type="password" class="form-control" placeholder="Password" name='j_password' required>
+					<input type="password" class="form-control" placeholder="Password" name='password' required>
 				</div>
 				<button class="btn btn btn-lg btn-info btn-light" type="submit">로그인</button>
 			</form>
 		</div>
 	</div>
-	<hr>
-	<jsp:include page="footer.jsp"/>
+<hr>
+<jsp:include page="footer.jsp" />   
 </body>
 </html>

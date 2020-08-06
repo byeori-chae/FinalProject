@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/dbconn.jsp=UTF-8
-encoding//WebContent/reserve_booker_Up.jsp=UTF-8
+encoding//WebContent/editStay.jsp=UTF-8
+encoding//WebContent/member/idCheckForm.jsp=UTF-8
+encoding//WebContent/menu.jsp=UTF-8

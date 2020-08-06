@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import database.DBConnection;
+import mvc.database.DBConnection;
 import dto.ReserveDTO;
 
 public class ReserveDAO {
@@ -20,20 +20,20 @@ public class ReserveDAO {
 		conn = DBConnection.getConnection();
 	}
 	
+	//ì˜ˆì•½í•œ ê³ ê°ì •ë³´ì™€ ì˜ˆì•½ì •ë³´ ì „ë¶€ ë‹¤ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
 	public ArrayList<ReserveDTO> select(){
 		ArrayList<ReserveDTO> list = new ArrayList<ReserveDTO>();
-
+		
 		try{
-			String sql = "SELECT tbl_member.*, tbl_stay.*, tbl_reserve.rsv_code, rsv_idx, rsv_date, rsv_room, rsv_addPrice, rsv_checkin, rsv_checkout,\r\n" + 
-					"rsv_adult, rsv_child, rsv_addReason, rsv_totalPrice, rsv_cancelFee, rsv_cancelReason, rsv_refund, rsv_condition\r\n" + 
-					"FROM tbl_reserve\r\n" + 
-					"INNER JOIN tbl_member on tbl_reserve.rsv_memidx = tbl_member.mem_idx\r\n" + 
-					"INNER JOIN tbl_stay on tbl_reserve.rsv_code = tbl_stay.stay_code";
 			
+			String sql = "SELECT tbl_member.*, tbl_stay.*, tbl_reserve.* FROM tbl_reserve\r\n" + 
+					"INNER JOIN tbl_member on tbl_reserve.rsv_memidx = tbl_member.mem_idx\r\n" + 
+					"INNER JOIN tbl_stay on tbl_reserve.rsv_code = tbl_stay.stay_code ORDER BY tbl_reserve.rsv_date DESC";
+
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
-			while(rs.next()){ //next ¸Ş¼Òµå·Î Ä¿¼­¸¦ ´ÙÀ½À¸·Î ¿Å°Ü¼­ Ã³¸®
+			while(rs.next()){
 				ReserveDTO dto = new ReserveDTO();
 				
 				dto.setMemIdx(rs.getInt("mem_idx"));
@@ -45,13 +45,12 @@ public class ReserveDAO {
 				dto.setStayType(rs.getString("stay_type"));
 				dto.setStayName(rs.getString("stay_name"));
 				dto.setStayPrice(rs.getInt("stay_price"));
-
+				dto.setStayRoomType(rs.getString("stay_roomType"));
 				
 				dto.setRsvIdx(rs.getInt("rsv_idx"));
 				dto.setRsvDate(rs.getDate("rsv_date"));
 				dto.setStayCheckin(rs.getDate("rsv_checkin"));
 				dto.setStayCheckout(rs.getDate("rsv_checkout"));
-				dto.setRsvRoom(rs.getInt("rsv_room"));
 				dto.setRsvAddprice(rs.getInt("rsv_addPrice"));
 				dto.setRsvAddreason(rs.getString("rsv_addReason"));
 				dto.setRsvTotalprice(rs.getInt("rsv_totalPrice"));
@@ -72,8 +71,65 @@ public class ReserveDAO {
 		return list;
 	}
 
+	//íšŒì›,ìƒí’ˆ,ì˜ˆì•½ì˜ ëª¨ë“  ë ˆì½”ë“œ ê²€ìƒ‰(Select)í•˜ëŠ” ë©”ì„œë“œ â†’ (ê²€ìƒ‰ë‹¨ì–´ê°€ ë“¤ì–´ì™”ì„ë•ŒëŠ” whereë¥¼ ì´ìš©í•˜ì—¬ ê²€ìƒ‰í•´ì¤€ë‹¤.)
+	public ArrayList<ReserveDTO> select(String keyWord){
+	       
+        ArrayList<ReserveDTO> list = new ArrayList<ReserveDTO>();
+       
+        try{
+           
+            String sql = "SELECT tbl_member.*, tbl_stay.*, tbl_reserve.* FROM tbl_reserve\r\n" + 
+					"INNER JOIN tbl_member on tbl_reserve.rsv_memidx = tbl_member.mem_idx\r\n" + 
+					"INNER JOIN tbl_stay on tbl_reserve.rsv_code = tbl_stay.stay_code";
+			
+			if(keyWord != null && !keyWord.equals("") ){
+                sql += " WHERE mem_name LIKE '%"+keyWord.trim()+"%' or mem_phone LIKE '%"+keyWord.trim()+"%' ORDER BY tbl_reserve.rsv_date DESC";
+            }else{	//ëª¨ë“  ë ˆì½”ë“œ ê²€ìƒ‰
+                sql += " ORDER BY tbl_reserve.rsv_date DESC";
+            }
 
-	//¿¹¾àÀÚ Á¤º¸ ÀúÀå
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery(sql);
+           
+            while(rs.next()){
+            	ReserveDTO dto = new ReserveDTO();
+               
+            	dto.setMemIdx(rs.getInt("mem_idx"));
+				dto.setMemName(rs.getString("mem_name")); 
+				dto.setMemPhone(rs.getString("mem_phone"));
+				dto.setMemEmail(rs.getString("mem_email"));
+
+				dto.setStayCode(rs.getString("stay_code"));
+				dto.setStayType(rs.getString("stay_type"));
+				dto.setStayName(rs.getString("stay_name"));
+				dto.setStayPrice(rs.getInt("stay_price"));
+				dto.setStayRoomType(rs.getString("stay_roomType"));
+				
+				dto.setRsvIdx(rs.getInt("rsv_idx"));
+				dto.setRsvDate(rs.getDate("rsv_date"));
+				dto.setStayCheckin(rs.getDate("rsv_checkin"));
+				dto.setStayCheckout(rs.getDate("rsv_checkout"));
+				dto.setRsvAddprice(rs.getInt("rsv_addPrice"));
+				dto.setRsvAddreason(rs.getString("rsv_addReason"));
+				dto.setRsvTotalprice(rs.getInt("rsv_totalPrice"));
+				dto.setStayAdult(rs.getInt("rsv_adult"));
+				dto.setStayChild(rs.getInt("rsv_child"));			
+				dto.setRsvCondition(rs.getString("rsv_condition"));
+				dto.setRsvCancelFee(rs.getInt("rsv_cancelFee"));
+				dto.setRsvCancelReason(rs.getString("rsv_cancelReason"));
+				dto.setRsvRefund(rs.getInt("rsv_refund"));
+								
+				list.add(dto);
+			}
+        }catch(Exception e){          
+            System.out.println(e+"=> getDateSearch fail");        
+        }finally{          
+            dbclose();
+        }      
+        return list;
+    }  
+	
+	//ì˜ˆì•½ì ì •ë³´ ì €ì¥ ë²„íŠ¼
 	public int booker_update(ReserveDTO dto){
 		
 		int result = 0;
@@ -101,14 +157,14 @@ public class ReserveDAO {
 	}
 
 
-	//¿¹¾à Á¤º¸ ÀúÀå
+	//ì˜ˆì•½ ì •ë³´ ì €ì¥ ë²„íŠ¼
 	public int info_update(ReserveDTO dto){
 		
 		int result = 0;
 
 		try{
 			String sql = "UPDATE tbl_reserve A INNER JOIN tbl_stay B ON A.rsv_code = B.stay_code set A.rsv_date=?, A.rsv_checkin=?, A.rsv_checkout=?,"
-					+ "A.rsv_adult=?, A.rsv_child=?, A.rsv_room=?, B.stay_price=?, A.rsv_addPrice=?, A.rsv_addReason=?, A.rsv_totalPrice=? where A.rsv_idx=?";
+					+ "A.rsv_adult=?, A.rsv_child=?, B.stay_price=?, A.rsv_addPrice=?, A.rsv_addReason=?, A.rsv_totalPrice=? where A.rsv_idx=?";
 
 			pstmt = conn.prepareStatement(sql);
 			
@@ -117,12 +173,11 @@ public class ReserveDAO {
 			pstmt.setDate(3, dto.getStayCheckout());
 			pstmt.setInt(4, dto.getStayAdult());
 			pstmt.setInt(5, dto.getStayChild());
-			pstmt.setInt(6,dto.getRsvRoom());
-			pstmt.setInt(7, dto.getStayPrice());
-			pstmt.setInt(8, dto.getRsvAddprice());
-			pstmt.setString(9, dto.getRsvAddreason());
-			pstmt.setInt(10, dto.getRsvTotalprice());
-			pstmt.setInt(11, dto.getRsvIdx());
+			pstmt.setInt(6, dto.getStayPrice());
+			pstmt.setInt(7, dto.getRsvAddprice());
+			pstmt.setString(8, dto.getRsvAddreason());
+			pstmt.setInt(9, dto.getRsvTotalprice());
+			pstmt.setInt(10, dto.getRsvIdx());
 			
 			result = pstmt.executeUpdate();
 			
@@ -135,7 +190,7 @@ public class ReserveDAO {
 		return result;
 	}
 	
-	//Ãë¼Ò Á¤º¸ ÀúÀå
+	//ì·¨ì†Œ ì •ë³´ ì €ì¥ ë²„íŠ¼
 	public int cancel_insert(ReserveDTO dto){
 
 		int result = 0;
@@ -160,49 +215,29 @@ public class ReserveDAO {
 		return result;
 	}
 	
-	//ÀÌ¸§, ¿¬¶ôÃ³·Î °Ë»ö
-	public ArrayList<ReserveDTO> getMemberlist(String keyWord){
-	       
-        ArrayList<ReserveDTO> list = new ArrayList<ReserveDTO>();
-       
-        try{//½ÇÇà
-           
-            String sql ="SELECT tbl_member.*, tbl_stay.*, tbl_reserve.rsv_code, rsv_idx, rsv_date, rsv_room, rsv_addPrice, rsv_checkin, rsv_checkout,\r\n" + 
-					"rsv_adult, rsv_child, rsv_addReason, rsv_totalPrice, rsv_cancelFee, rsv_cancelReason, rsv_refund, rsv_condition\r\n" + 
-					"FROM tbl_reserve\r\n" + 
-					"INNER JOIN tbl_member on tbl_reserve.rsv_memidx = tbl_member.mem_idx\r\n" + 
-					"INNER JOIN tbl_stay on tbl_reserve.rsv_code = tbl_stay.stay_code";
-           
-            if(keyWord != null && !keyWord.equals("") ){
-                sql +="WHERE mem_name LIKE '%"+keyWord.trim()+"%' order by mem_name";
-            }else{//¸ğµç ·¹ÄÚµå °Ë»ö
-                sql +="order by mem_name";
-            }
-            System.out.println("sql = " + sql);
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery(sql);
-           
-            while(rs.next()){
-            	ReserveDTO dto = new ReserveDTO();
-               
-            	dto.setStayCheckin(rs.getDate(1));
-            	dto.setMemName(rs.getString(2));
-            	dto.setRsvIdx(rs.getInt(3));
-            	dto.setStayName(rs.getString(4));
-            	dto.setStayPrice(rs.getInt(5));
-            	dto.setRsvCondition(rs.getString(6));
-               
-                list.add(dto);
-            }
-        }catch(Exception e){          
-            System.out.println(e+"=> getMemberlist fail");        
-        }finally{          
-            dbclose();
-        }      
-        return list;
-    }  
+	//ì˜ˆì•½ìƒíƒœ ì €ì¥ ë²„íŠ¼
+	public int condition_up(ReserveDTO dto){
 
+		int result = 0;
 
+		try{
+			String sql = "update tbl_reserve set rsv_condition=? where rsv_idx=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getRsvCondition());
+			pstmt.setInt(2, dto.getRsvIdx());
+			
+			result = pstmt.executeUpdate();	
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			dbclose();
+		}
+
+		return result;
+	}
+	
+	//DBë‹«ëŠ” ë©”ì†Œë“œ
 	public void dbclose(){
 		try {
 			if(rs != null){	rs.close(); } //Resultset close

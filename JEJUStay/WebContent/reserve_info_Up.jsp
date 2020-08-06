@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page import="dao.ReserveDAO"%>
 <%@ page import="dto.ReserveDTO"%>
 <%@ page import="java.sql.*"%>
@@ -22,7 +22,6 @@
 		dto.setStayAdult(Integer.parseInt(request.getParameter("stay_adult")));
 		dto.setStayChild(Integer.parseInt(request.getParameter("stay_child")));
 		
-		dto.setRsvRoom(Integer.parseInt(request.getParameter("rsv_room")));
 		dto.setStayPrice(Integer.parseInt(request.getParameter("stay_price")));
 		dto.setRsvAddprice(Integer.parseInt(request.getParameter("rsv_addPrice")));
 		dto.setRsvAddreason(request.getParameter("rsv_addReason"));

@@ -36,9 +36,30 @@ function del(no) {
 #reserve_info {
 	display: inline;
 }
+#rsv_condition1 {
+	width: 120px; /* 원하는 너비설정 */
+	padding: .2em .2em; /* 여백으로 높이 설정 */
+	font-family: inherit; /* 폰트 상속 */
+	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;/* 네이티브 화살표 대체 */
+	border: 1px solid #999;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+#rsv_cancelRule {
+	width: 220px; /* 원하는 너비설정 */
+	padding: .2em .2em; /* 여백으로 높이 설정 */
+	font-family: inherit; /* 폰트 상속 */
+	background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;/* 네이티브 화살표 대체 */
+	border: 1px solid #999;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+
 </style>
 
-<title>고객 세부 정보</title>
+<title>예약세부정보 | Admin</title>
 </head>
 <body>
 	<jsp:include page="/menu_admin.jsp" />
@@ -58,23 +79,31 @@ function del(no) {
 							reservedto = reservelist.get(i);
 								if(idx == reservedto.getRsvIdx()) {
 			%>
+		<form action="reserve_con_Up.jsp?rsv_idx=<%=reservedto.getRsvIdx()%>" method="post">
 		<div class="container">
 			<table class="table">
 				<tr>
-					<td class="col-md-1"><span class="badge progress-bar-info"
+					<td class="col-md-2"><span class="badge progress-bar-info"
 						style="margin-left: 200px">예약번호 : <%=reservedto.getRsvIdx()%></span></td>
-					<td class="col-md-5"><%=reservedto.getStayName()%></td>
-					<td><span class="tab">&#9;&#9;</span></td>
-					<td><input type="button" class="btn btn-warning"
-						style="padding: 5px" value="일정표"> <input type="button"
-						name="rsv_condition" class="btn btn-success" style="padding: 5px"
-						value="예약완료" onclick="btn_success();"> <input
-						type="button" name="rsv_condition" class="btn btn-danger"
-						style="padding: 5px" onclick="btn_cancel();" value="예약취소"></td>
+					<td class="col-md-6"><%=reservedto.getStayName()%> - <%=reservedto.getStayRoomType()%></td>
+					<td class="col-md-4"><select name="rsv_condition1"
+						id="rsv_condition1" onchange="conditionValue(this.form)">
+							<option value="0">접수완료</option>
+							<option value="1">예약완료</option>
+							<option value="2">예약취소</option>
+					</select>
+					<input type="text" name="rsv_condition" size="6" style="color: red; font-weight:bold;" value="<%=reservedto.getRsvCondition()%>">
+					<input class="btn btn-warning" type="submit" value="저장" style="padding: 2px"></td>
+					<td class="col-md-1"><input type="button"
+						class="btn btn-danger" style="padding: 5px; float:left;" value="예약상품 확인"
+						onclick="location.href='http://localhost:9090/JEJUStay/stayRoom.jsp?code=<%=reservedto.getStayCode()%>'">
+					</td>
 				</tr>
 			</table>
 		</div>
+		</form>
 	</div>
+
 	<div id="content" class="container">
 		<div id="content_box" class="panel-group">
 			<!-- 예약자 정보 시작-->
@@ -123,9 +152,7 @@ function del(no) {
 							value="<%=reservedto.getStayAdult()%>"><b>명</b>&nbsp;&nbsp;
 						<b>아동 </b><input name="stay_child" type="text" size="1"
 							value="<%=reservedto.getStayChild()%>"><b>명</b> <span
-							class="tab">&#9;</span> <b>사용객실 : </b><input type="text"
-							name="rsv_room" size="1" style="text-align: right;"
-							value="<%=reservedto.getRsvRoom()%>"><b>개</b>
+							class="tab">&#9;</span>
 
 						<p>
 							<br> &nbsp;<b>숙박 일자 </b>&nbsp;&nbsp;<input type="date"
@@ -183,7 +210,7 @@ function del(no) {
 							class="tab">&#9;&#9;</span> &nbsp;&nbsp;<b>취소 사유</b>&nbsp; <input
 							type="text" name="rsv_cancelReason" style="text-align: left;"
 							size="20" value="<%=reservedto.getRsvCancelReason()%>"> <br>
-						<br> <span class="tab">&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;</span>
+						<br> <span class="tab">&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;</span>
 						<b>환불 금액</b>&nbsp;<input type="text" name="rsv_refund" size="8" placeholder="환불금액"
 							value="<%=reservedto.getStayPrice() + reservedto.getRsvAddprice() - reservedto.getRsvCancelFee()%>"
 							style="text-align: right; color: red;">원
@@ -239,11 +266,7 @@ function del(no) {
 					}
 				%>
 			</form>
-			<%
-						}
-					}
-				}
-			%>
+
 			<!-- 상담내용 목록 끝 -->
 		</div>
 	</div>
@@ -277,24 +300,29 @@ function cancelFeeValue(frm) {
 }
 </script>
 <script type="text/javascript">
-function btn_success() {
-	if(confirm("[예약완료]\n★ 취소 규정 고객 안내 필수 ★")){
-	        location.href = "admin.jsp?rsv_condition="+<%=reservedto.getRsvCondition()%>;
-	        return true;
-	 } else {
-	   	    return false;
-	 }
+function conditionValue(frm) { 
+    var rsv_condition = frm.rsv_condition1.selectedIndex;  
+    switch( rsv_condition ){
+       case 0:
+         frm.rsv_condition.value = '접수완료';
+         break;
+       case 1:
+         frm.rsv_condition.value = '예약완료';
+         break;
+       case 2:
+         frm.rsv_condition.value = '예약취소';
+         break;
+	}  
+	return true;
 }
 </script>
 <script type="text/javascript">
-function btn_cancel() {
-	if(confirm("[예약취소]\n★ 취소 규정 고객 안내 필수 ★")) {
-		location.href = "admin.jsp?rsv_condition="+<%=reservedto.getRsvCondition()%>;
-        return true;
-    } else {
-        return false;
-	}
-}
+
 </script>
+			<%
+						}
+					}
+				}
+			%>
 </body>
 </html>

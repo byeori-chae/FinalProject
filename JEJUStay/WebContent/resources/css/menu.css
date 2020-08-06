@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #ffffff;
+	font-family: "맑은 고딕";
+	position: relative;	
+}
+span { 
+ margin:20px 0px; 
+ font-size: 35px;
+ font-family: sans-serif;
+ color:#6799FF;
+ font-weight: bold;
+ }
+ 
+table.list{	
+	border-collapse:collapse;
+}
+table.list td{
+	border: 1px solid #c7c7bc;
+	text-align: right;
+	vertical-align:middle; 
+	color:#0B0B61;
+	font-weight: bold;	
+	cellpadding:"40px";
+}
+table.list td a{
+	display:block;
+}
+
+table.list td a : hover{
+	bordercolor: #8000FF;
+}
+tr, th{
+	font-size: 20px;
+	color:#08088A;
+}
+tr, td{
+	font-size: 15px;
+}

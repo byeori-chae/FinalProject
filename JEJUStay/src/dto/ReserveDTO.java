@@ -19,14 +19,14 @@ public class ReserveDTO implements Serializable{
 	private String stayCode;		// 상품코드
 	private Date stayCheckin;		// 체크인 
 	private Date stayCheckout;		// 체크아웃
+	private String stayRoomType;	// 객실타입
 	private String stayType;		// 숙소유형
 	private String stayName;		// 예약상품명 
 	private int stayPrice;			// 요금 
 	private int stayAdult;			// 인원(성인)
 	private int stayChild;			// 인원(소아)
 	
-	private int rsvIdx;				// 예약번호
-	private int rsvRoom;			// 객실 수 
+	private int rsvIdx;				// 예약번호			// 객실 수 
 	private Date rsvDate;			// 예약일자 
 	private int rsvAddprice;		// 추가비용 
 	private String rsvAddreason;	// 추가비용발생 사유 
@@ -137,12 +137,7 @@ public class ReserveDTO implements Serializable{
 	public void setRsvIdx(int rsvIdx) {
 		this.rsvIdx = rsvIdx;
 	}
-	public int getRsvRoom() {
-		return rsvRoom;
-	}
-	public void setRsvRoom(int rsvRoom) {
-		this.rsvRoom = rsvRoom;
-	}
+	
 	public Date getRsvDate() {
 		return rsvDate;
 	}
@@ -202,6 +197,20 @@ public class ReserveDTO implements Serializable{
 	 */
 	public void setRsvCondition(String rsvCondition) {
 		this.rsvCondition = rsvCondition;
+	}
+
+	/**
+	 * @return the stayRoomType
+	 */
+	public String getStayRoomType() {
+		return stayRoomType;
+	}
+
+	/**
+	 * @param stayRoomType the stayRoomType to set
+	 */
+	public void setStayRoomType(String stayRoomType) {
+		this.stayRoomType = stayRoomType;
 	}
 	
 

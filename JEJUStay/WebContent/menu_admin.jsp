@@ -30,10 +30,11 @@
 <body>
 	<div id="sidebar">
 		<ul class="nav nav-pills nav-stacked">
-			<li ><a	href="http://localhost:9090/JEJUStay/admin.jsp">예약관리</a></li>
-			<li ><a	href="http://localhost:9090/JEJUStay/addStay.jsp">상품등록</a></li>
-			<li ><a	href="http://localhost:9090/JEJUStay/editStay.jsp?edit=update">상품수정</a></li>
-			<li ><a	href="http://localhost:9090/JEJUStay/editStay.jsp?edit=delete">상품삭제</a></li>
+			<li><a href="http://localhost:9090/JEJUStay/welcome.jsp">제주의 밤 <br>홈페이지</a></li>
+			<li><a href="http://localhost:9090/JEJUStay/admin.jsp">예약관리</a></li>
+			<li><a href="http://localhost:9090/JEJUStay/addStay.jsp">상품등록</a></li>
+			<li><a href="http://localhost:9090/JEJUStay/editStay.jsp?edit=update">상품수정</a></li>
+			<li><a href="http://localhost:9090/JEJUStay/editStay.jsp?edit=delete">상품삭제</a></li>
 		</ul>
 	</div>
 </body>

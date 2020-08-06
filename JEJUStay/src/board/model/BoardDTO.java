@@ -1,101 +1,81 @@
 package board.model;
 
 public class BoardDTO {
+	private int num;
+	private String id;
+	private String name;
+	private String subject;
+	private String content;
+	private String regist_day;
+	private int hit;
+	private String ip;
 
-	private int brdNum;			// 게시글 순번 
-	private String brdName;		// 작성자 이름
-	private String brdIdx;		// 회원번호
-	private String brdTitle;	// 글 제목 
-	private String brdContent;	// 글 내용 
-	private int brdHit;			// 조회수 
-	private String brdDate;		// 작성날짜 
-	private int brdRef;			// 답변글 그룹 
-	private int brdLev;			// 답변글 레벨 
-	private int brdSeq;			// 답변글 순서	
-	
 	public BoardDTO() {
-		
+		super();		
 	}
 
-	public int getBrdNum() {
-		return brdNum;
+	public int getNum() {
+		return num;
 	}
 
-	public void setBrdNum(int brdNum) {
-		this.brdNum = brdNum;
+	public void setNum(int num) {
+		this.num = num;
 	}
 
-	public String getBrdName() {
-		return brdName;
+	public String getId() {
+		return id;
 	}
 
-	public void setBrdName(String brdName) {
-		this.brdName = brdName;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getBrdIdx() {
-		return brdIdx;
+	public String getName() {
+		return name;
 	}
 
-	public void setBrdIdx(String brdIdx) {
-		this.brdIdx = brdIdx;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getBrdTitle() {
-		return brdTitle;
+	public String getSubject() {
+		return subject;
 	}
 
-	public void setBrdTitle(String brdTitle) {
-		this.brdTitle = brdTitle;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
-	public String getBrdContent() {
-		return brdContent;
+	public String getContent() {
+		return content;
 	}
 
-	public void setBrdContent(String brdContent) {
-		this.brdContent = brdContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public int getBrdHit() {
-		return brdHit;
+	public String getRegist_day() {
+		return regist_day;
 	}
 
-	public void setBrdHit(int brdHit) {
-		this.brdHit = brdHit;
+	public void setRegist_day(String regist_day) {
+		this.regist_day = regist_day;
 	}
 
-	public String getBrdDate() {
-		return brdDate;
+	public int getHit() {
+		return hit;
 	}
 
-	public void setBrdDate(String brdDate) {
-		this.brdDate = brdDate;
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 
-	public int getBrdRef() {
-		return brdRef;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setBrdRef(int brdRef) {
-		this.brdRef = brdRef;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
-	public int getBrdLev() {
-		return brdLev;
-	}
-
-	public void setBrdLev(int brdLev) {
-		this.brdLev = brdLev;
-	}
-
-	public int getBrdSeq() {
-		return brdSeq;
-	}
-
-	public void setBrdSeq(int brdSeq) {
-		this.brdSeq = brdSeq;
-	}
-	
-	
 }

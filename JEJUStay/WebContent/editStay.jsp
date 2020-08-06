@@ -3,7 +3,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css" />
-<title>상품 편집</title>
+<title>상품편집 | Admin</title>
 <script type="text/javascript">
 	function deleteConfirm(code) {
 		if (confirm("해당 상품을 삭제합니다.") == true)
@@ -24,7 +24,7 @@
 			<h1 class="display-3"><b>상품 편집</b></h1>
 		</div>
 	</div>
-	<div class="container" >
+	<div class="container">
 		<div class="row" align="center">
 			<%@ include file="dbconn.jsp"%>
 			<%
@@ -37,8 +37,8 @@
 				while (rs.next()) {
 			%>
 			<div class="col-md-6">
-			<img src="media/<%=rs.getString("stay_fileName")%>.PNG" width="500" height="350">
-				<h3><%=rs.getString("stay_code")%></h3>
+			<img src="./media/<%=rs.getString("stay_fileName")%>.PNG" width="500" height="350">
+				<h3>상품코드 : <%=rs.getString("stay_code")%></h3>
 				<p><b>[ <%=rs.getString("stay_name")%> ]</b> - <%=rs.getString("stay_roomType")%>
 				<p><%=rs.getString("stay_price")%>원
 				<p><%

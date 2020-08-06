@@ -16,7 +16,7 @@
 	position: absolute.
 }
 </style>
-<title>상품 수정</title>
+<title>상품수정 | Admin</title>
 </head>
 <body>
 	<jsp:include page="menu_admin.jsp" />
@@ -27,7 +27,7 @@
 	</div>
 	<%@ include file="dbconn.jsp"%>
 	<%
-		String stay_code = request.getParameter("stay_code");
+		String stay_code = request.getParameter("code");
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -40,9 +40,6 @@
 		if (rs.next()) {
 	%>
 	<div class="container" id="content">
-		<div class="col-md-6">
-			<img src="media/<%=rs.getString("stay_fileName")%>.PNG" width="500" height="350">
-		</div>
 		<form name="newStay" action="./processUpdateStay.jsp" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2">상품 코드</label>
@@ -53,10 +50,10 @@
 			<div class="form-group row">
 				<label class="col-sm-2">숙소 타입</label>
 				<div class="col-sm-5">
-					<input type="radio" name="stay_type" value="호텔">호텔&nbsp;
-					<input type="radio" name="stay_type" value="리조트">리조트&nbsp;
-					<input type="radio" name="stay_type" value="펜션">펜션&nbsp;
-					<input type="radio" name="stay_type" value="카라반">카라반&nbsp;
+					<input type="radio" name="stay_type" value="호텔"> 호텔&nbsp;&nbsp;
+					<input type="radio" name="stay_type" value="리조트"> 리조트&nbsp;&nbsp;
+					<input type="radio" name="stay_type" value="펜션"> 펜션&nbsp;&nbsp;
+					<input type="radio" name="stay_type" value="카라반"> 카라반&nbsp;&nbsp;
 				</div>
 			</div>
 			<div class="form-group row">

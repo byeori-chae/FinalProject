@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import database.DBConnection;
+import mvc.database.DBConnection;
 import dto.ConsultDTO;
 
 public class ConsultDAO {
@@ -18,7 +18,7 @@ public class ConsultDAO {
 		conn = DBConnection.getConnection();
 	}
 
-	//consult Å×ÀÌºí¿¡¼­ ³»¿ëµéÀ» °¡Áö°í ¿Í¼­ listÇüÅÂ·Î ¹İÈ¯
+	//consult å ì™ì˜™å ì‹±ë¸ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì‹¶ì‡½ì˜™ listå ì™ì˜™å ìŠ¹ë¤„ì˜™ å ì™ì˜™í™˜
 	public ArrayList<ConsultDTO> select(int rsvIdx) throws SQLException{
 		
 		
@@ -53,7 +53,7 @@ public class ConsultDAO {
 		return list;
 	}
 
-	//ÀúÀå¹öÆ° ¡æ insert È£ÃâÇØ¼­ DB¿¡ ÀÔ·Â
+	//å ì™ì˜™å ì™ì˜™å ì‹£ï¿½ å ì™ì˜™ insert í˜¸å ì™ì˜™å ìŒ”ì‡½ì˜™ DBå ì™ì˜™ å ìŒ‰ë¤„ì˜™
 	public int insert(ConsultDTO dto) throws SQLException{
 		int result = 0;
 
@@ -78,7 +78,7 @@ public class ConsultDAO {
 	}
 
 
-	//»èÁ¦¹öÆ° ¡æ »ó´ã³»¿ë »èÁ¦ÇÔ
+	//å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¼ å ì™ì˜™ å ì™ì˜™é™ì‚¼ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	public int delete(ConsultDTO dto) throws SQLException {
 		int result = 0;
 

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 
 <head>
-<title>◐ 제주의 밤에 오신 것을 환영합니다◑</title>
+<title>Welcome | 제주의밤</title>
 <link rel="stylesheet" href="resources/css/search.css" />
  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
  <script src="resources/js/mainbanner.js"></script>
@@ -14,7 +14,7 @@
 
 body {
 	font-family: "돋움", dotum, sans-serif;
-	color: #000;
+	color: #000;.
 }
 
 li {
@@ -72,12 +72,11 @@ li {
 
 <body>
 	<%@ include file = "/menu.jsp" %>	
-	<div id="scrollable">
 		<div id="wrap">
 			<div id="banner" style="text-align: center">
 				<div class="vis_frame">
 					<ul>
-						<li><a href="#"><img src="media/main1.png" alt="" width="1000" height="400" align="top" vspace=50 hspace=50/></a></li>
+						<li><a href="#"><img src="media/main1.png" alt="" height="400" align="top" vspace=50 hspace=50/></a></li>
 						<li><a href="#"><img src="media/main1-2.PNG" alt="" width="1000" height="400" align="top" vspace=50 hspace=50/></a></li>
 						<li><a href="#"><img src="media/main1-3.PNG" alt="" width="1000" height="400" align="top" vspace=50 hspace=50/></a></li>
 					</ul>
@@ -91,15 +90,33 @@ li {
 		
 		<!-- 검색창 -->
 		
-		<div class="container" style="padding-top: 50px">
-		<div class="row" >
+		<div class="container" style="padding-top: 50px" >
+		  <div class="row" >
 			<div class="form-group" >
-				 <form class="form-inline" style="padding-left: 250px">					
-					<input type="text" name="search" class="form-control" placeholder="숙소명, 지역명 " size=70/>
+				 <form name="search" class="form-inline" action="http://localhost:9090/JEJUStay/stayAll.jsp?" style="padding-left: 250px" onSubmit="return checkForm()">					
+					<input type="text" name="keyField" class="form-control" placeholder="숙소명 " size=70/>
 					<input type="submit" class="btn btn-default btn-group-lg" value="찾기">
 				 </form>				  		
 			</div>			
-		</div>
+		  </div>
+		  <br>
+		    <div class="form-group row" >
+				<div class="col-sm-5" style="padding-left: 220px">
+					<a href="http://localhost:9090/JEJUStay/stayHotel.jsp"><img src="media/main2.png" width="280" height="180"></a>
+				</div>
+				<div class="col-sm-5" style="padding-left: 100px">
+					<a href="http://localhost:9090/JEJUStay/stayPension.jsp"><img src="media/main3.png" width="280" height="180"></a>
+				</div>
+		  	</div>
+			<div class="form-group row">
+				<div class="col-sm-5" style="padding-left: 220px">
+					<a href="http://localhost:9090/JEJUStay/stayResort.jsp"><img src="media/main4.png" width="280" height="180"></a>
+				</div>
+				<div class="col-sm-5" style="padding-left: 100px">
+					<a href="http://localhost:9090/JEJUStay/stayCaravan.jsp"><img src="media/main5.png" width="280" height="180"></a>
+				</div>
+		
+			</div>
 		</div>
 		<!-- 
 		
@@ -114,16 +131,15 @@ li {
 		-->		
 		<!-- /.row -->
 		<br><br><br>
-
-		<div class="container" style="text-align: center">			
-				<p><a href="#"><img src="media/main2.png" width="280" height="180" vspace="100" hspace="50"></a>
-				   <a href="#"><img src="media/main3.png" width="280" height="180" vspace="100" hspace="50"></a>
-				<p><a href="#"><img src="media/main4.png" width="280" height="180" vspace="100" hspace="50"></a>
-				   <a href="#"><img src="media/main5.png" width="280" height="180" vspace="100" hspace="50"></a>
-		</div>
-			
-	</div>
 		<hr>
-	<jsp:include page="footer.jsp"/>
+<jsp:include page="footer.jsp" />	
 </body>
 </html>
+<script type="text/javascript">
+function checkForm() {
+		if (!document.search.keyField.value) {
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+	}
+</script>

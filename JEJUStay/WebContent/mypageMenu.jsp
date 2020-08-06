@@ -67,10 +67,10 @@ ul.sub li:hover {
         <li class="group">
             <div class="title">마이페이지</div>
             <ul class="sub">
-                <li><a href="#">예약내역</a></li>
-                <li><a href="#">회원정보 수정</a></li>
+                <li><a href="http://localhost:9090/JEJUStay/reserveHistory.jsp">예약내역</a></li>
+                <li><a href="http://localhost:9090/JEJUStay/member/updateMember.jsp">회원정보수정</a></li>
             </ul>
         </li>       
-    </ul>
+    </ul>	
 </body>
 </html>
